@@ -84,7 +84,7 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
 
     # Add code to combine dataframes by appending all dataframes onto first dataframe
     df = dataframes[0]
-    for i in dataframes:
+    for i in dataframes[1:]:
         df = df.append(i)
         
     return df
