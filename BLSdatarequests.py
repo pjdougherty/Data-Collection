@@ -47,8 +47,24 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
                            'LAUMT481910000000003':'Dallas','LAUMT482642000000003':'Houston','LAUMT484170000000003':'San Antonio',
                            'LAUMT534266000000003':'Seattle','LNU04000000':'US'}
         elif statistic == 'Employment':
-            series = []
-            series_dict = {'':'', '':''}
+            series = ['SMU04380600000000001','SMU06310800000000001','SMU06401400000000001',
+                      'SMU06417400000000001','SMU06418600000000001','SMU08197400000000001',
+                      'SMU11479000000000001','SMU12331000000000001','SMU12453000000000001',
+                      'SMU13120600000000001','SMU17169800000000001','SMU24125800000000001',
+                      'SMU25716500000000001','SMU26198200000000001','SMU27334600000000001',
+                      'SMU29411800000000001','SMU36356200000000001','SMU37167400000000001',
+                      'SMU41389000000000001','SMU42379800000000001','SMU42383000000000001',
+                      'SMU48191000000000001','SMU48264200000000001','SMU48417000000000001',
+                      'SMU53426600000000001']
+            series_dict = {'SMU04380600000000001':'Phoenix','SMU06310800000000001':'Los Angeles','SMU06401400000000001':'Riverside',
+                           'SMU06417400000000001':'San Diego','SMU06418600000000001':'San Francisco','SMU08197400000000001':'Denver',
+                           'SMU11479000000000001':'Washington, DC','SMU12331000000000001':'Miami','SMU12453000000000001':'Tampa',
+                           'SMU13120600000000001':'Atlanta','SMU17169800000000001':'Chicago','SMU24125800000000001':'Baltimore',
+                           'SMU25716500000000001':'Boston','SMU26198200000000001':'Detroit','SMU27334600000000001':'Minneapolis',
+                           'SMU29411800000000001':'St. Louis','SMU36356200000000001':'New York','SMU37167400000000001':'Charlotte',
+                           'SMU41389000000000001':'Portland','SMU42379800000000001':'Philadelphia','SMU42383000000000001':'Pittsburgh',
+                           'SMU48191000000000001':'Dallas','SMU48264200000000001':'Houston','SMU48417000000000001':'San Antonio',
+                           'SMU53426600000000001':'Seattle'}
     elif geography == 'All States':
         if statistic == 'Unemployment Rate':
             series = []
