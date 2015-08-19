@@ -72,7 +72,7 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
     json_data = json.loads(p.text)
 
     dataframes = []
-    for i in range(0, len(json_data['Results']['series'])-1):
+    for i in range(0, len(json_data['Results']['series'])):
         df = pd.DataFrame(json_data['Results']['series'][i]['data'])
         df['location'] = series_dict[json_data['Results']['series'][i]['seriesID']]
         # Create datetime field
@@ -82,7 +82,7 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
         df.value = df.value.astype(float)
         dataframes.append(df)
 
-    # Add code to combine dataframes by appending all dataframes onto first dataframe
+    # Append all dataframes onto first dataframe
     df = dataframes[0]
     for i in dataframes[1:]:
         df = df.append(i)
