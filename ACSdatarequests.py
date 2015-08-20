@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 
 # See all available variables with series code listed
-acs_var = pd.read_csv(r'G:\Data Center\Scripts\ACSvariables.csv')
+acs_var = pd.read_csv('https://github.com/pjdougherty/Data-Collection/blob/master/ACSvariables.csv')
 auth_key = #
 # Register with the Census Bureau to receive an API key that can be used to request data via this API
 
