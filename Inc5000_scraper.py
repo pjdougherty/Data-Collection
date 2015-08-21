@@ -70,9 +70,9 @@ def getInc5000(year):
         for i in current_company['data']['years'][1]:
             years_list_prev.append(str(i)+'_prev')
             
-    # Create a dataframe from the long list and transpose it
+    # Create a dataframe from the long list
     inc5000 = pd.DataFrame(all_co_data_list)
-    inc5000 = inc5000.T.reset_index(drop=True)
+    # inc5000 = inc5000.T.reset_index(drop=True) # No need to transpose; the df is constructed properly
     # Rename columns by simply replacing them with the list of columns created by the last company to loop
     inc5000.columns = [key_list+years_list_current+years_list_prev]
     
