@@ -12,7 +12,7 @@ def getInc5000(year):
     # Set current_company_id equal to that of the #1 company for the current year's Inc. 5000 List
     # If scraping a previous year, companies that end up on a newer list will cause the scraper
     # to jump up to the newer list.
-    year_dict = 22890 # 2014 #1, Fuhu
+    year_dict = 36631 # 2015 #1, Ultra Mobile
     
     ''' Sample lists for dataframe headers'''
     '''
