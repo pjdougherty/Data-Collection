@@ -65,6 +65,21 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
                            'SMU41389000000000001':'Portland','SMU42379800000000001':'Philadelphia','SMU42383000000000001':'Pittsburgh',
                            'SMU48191000000000001':'Dallas','SMU48264200000000001':'Houston','SMU48417000000000001':'San Antonio',
                            'SMU53426600000000001':'Seattle'}
+	elif statistic == 'CPI':
+	    series = ['CUURA101SA0L1E', 'CUURA102SA0L1E', 'CUURA103SA0L1E',
+		      'CUURA104SA0L1E', 'CUURA207SA0L1E', 'CUURA208SA0L1E',
+		      'CUURA209SA0L1E', 'CUURA211SA0L1E', 'CUURA311SA0L1E',
+		      'CUURA316SA0L1E', 'CUURA318SA0L1E', 'CUURA319SA0L1E',
+		      'CUURA320SA0L1E', 'CUURA421SA0L1E', 'CUURA422SA0L1E',
+		      'CUURA423SA0L1E', 'CUURA424SA0L1E', 'CUURA425SA0L1E',
+		      'CUURA433SA0L1E']
+	    series_dict = {'CUURA101SA0L1E':'New York', 'CUURA102SA0L1E':'Philadelphia', 'CUURA103SA0L1E':'Boston',
+		      		'CUURA104SA0L1E':'Pittsburgh', 'CUURA207SA0L1E':'Chicago', 'CUURA208SA0L1E':'Detroit',
+		      		'CUURA209SA0L1E':'St. Louis', 'CUURA211SA0L1E':'Minneapolis', 'CUURA311SA0L1E':'Baltimore-Washington',
+		      		'CUURA316SA0L1E':'Dallas', 'CUURA318SA0L1E':'Houston', 'CUURA319SA0L1E':'Atlanta',
+		    		'CUURA320SA0L1E':'Miami', 'CUURA421SA0L1E':'Los Angeles', 'CUURA422SA0L1E':'San Francisco',
+		    		'CUURA423SA0L1E':'Seattle', 'CUURA424SA0L1E':'San Diego', 'CUURA425SA0L1E':'Portland',
+		    	  	'CUURA433SA0L1E':'Denver'}
     elif geography == 'All States':
         if statistic == 'Unemployment Rate':
             series = []
