@@ -9,12 +9,12 @@ import requests
 import pandas as pd
 
 def getInc5000(year):
-    # Create dictionary of Inc. 5000 years with the Inc-designated id of the top-ranked company in each year
-    year_dict = {2014:22890}
+    # Set current_company_id equal to that of the #1 company for the current year's Inc. 5000 List
+    # If scraping a previous year, companies that end up on a newer list will cause the scraper
+    # to jump up to the newer list.
+    year_dict = 36631 # 2015 #1, Ultra Mobile
     
-    # Set current_company_id equal to that of Fuhu, the #1 company in 2014
-    current_company_id = year_dict[year]
-    
+    ''' Sample lists for dataframe headers'''
     '''
     key_list = [u'app_revenues_fouryearsago', u'city_display_name', u'twitter', u'app_employ_fouryearsago', u'rank',
                 u'app_revenues_lastyear', u'linkedin', u'ifc_filelocation', u'id', u'app_employ_lastyear',
@@ -72,12 +72,13 @@ def getInc5000(year):
             
     # Create a dataframe from the long list
     inc5000 = pd.DataFrame(all_co_data_list)
+<<<<<<< HEAD
     # inc5000 = inc5000.T.reset_index(drop=True) # No need to transpose; the df is constructed properly
+=======
+>>>>>>> origin/master
     # Rename columns by simply replacing them with the list of columns created by the last company to loop
     inc5000.columns = [key_list+years_list_current+years_list_prev]
     
     return inc5000
     
 # Example: getInc5000(2014)
-    
-inc2014 = getInc5000(2014)
