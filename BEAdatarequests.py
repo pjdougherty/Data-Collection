@@ -46,6 +46,33 @@ def getBEAData(user_key, dataset, keycode, fmt='json'):
     df['State'] = df.GeoName.str.split(',').str.get(1).str.split(' ').str.get(1)
     
     return df
+
+def plotBEAData(df, region, title):
+    '''
+    params:
+        - df: pass a dataframe for plotting. Useful when creating multiple dataframes from multiple API calls.
+        - region: value to match to df.Region. Typically the principal city of an MSA.
+        - title: instead of relying on a huge dictionary to pick a title, just name the chart yourself based on what you know goes on it.
+    '''
+    fig, ax = plt.subplots()
+    
+    for r in region:
+        d = df[df.Region==r].sort('TimePeriod')
+        plt.plot(d.TimePeriod, d.DataValue)
+    
+    # Make a list of y-axis labels
+    labels = ax.get_yticks().tolist()
+    # Format them with a comma and a dollar sign at the front, and drop any decimal places
+    labels = ['$'+format(l, ',').split('.')[0] for l in labels]
+    # Set the y-axis to be labeled with the now-formatted labels
+    ax.set_yticklabels(labels)
+    
+    plt.ylabel('{}'.format(df.keycode[0]))
+    plt.title('{}'.format(title))   
+    
+    plt.tight_layout()
+    
+    return fig
     
 BEA_key = '' # Enter BEA API ID code
 
