@@ -58,7 +58,7 @@ def plotBEAData(df, region, title):
     
     for r in region:
         d = df[df.Region==r].sort('TimePeriod')
-        plt.plot(d.TimePeriod, d.DataValue)
+        plt.plot(d.TimePeriod, d.DataValue, label=r)
     
     # Make a list of y-axis labels
     labels = ax.get_yticks().tolist()
@@ -68,7 +68,8 @@ def plotBEAData(df, region, title):
     ax.set_yticklabels(labels)
     
     plt.ylabel('{}'.format(df.keycode[0]))
-    plt.title('{}'.format(title))   
+    plt.title('{}'.format(title))
+    plt.legend(loc=0)
     
     plt.tight_layout()
     
