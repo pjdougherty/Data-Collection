@@ -7,15 +7,18 @@ Created on Tue Aug 18 10:10:02 2015
 This script automates the collection of unemployment rate and employment data for the 25 largest US metros.
 
 The BLS limits API users to request 25 series per query when using the unregistered API v1.0. Registration allows for querying 50 series. Other limits are shown here:
-Service			Version 2.0	Version 1.0
-			(Registered)	(Unregistered)
-Daily query limit		500		25
-Series per query limit		50		25
-Years per query limit		20		10
-Net/Percent Changes		Yes		No
-Optional annual averages	Yes		No
-Series description
-information (catalog)		Yes		No
++-------------------------+--------------+--------------+
+| Service		  | Version 2.0  | Version 1.0  |
+|     			  | (Registered) |(Unregistered)|
++-------------------------+--------------+--------------+
+| Daily query limits      |         500	 |          25  |
+| Series per query limit  |	     50	 |	    25  |
+| Years per query limit   |	     20	 |          10  |
+| Net/Percent Changes	  |         Yes  |	    No  |
+| Optional annual averages|         Yes	 |          No  |
+| Series description      |              |              |
+| information (catalog)	  |	    Yes  |          No  |
++-------------------------+--------------+--------------+
 """
 
 import requests
@@ -65,6 +68,26 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
                            'SMU41389000000000001':'Portland','SMU42379800000000001':'Philadelphia','SMU42383000000000001':'Pittsburgh',
                            'SMU48191000000000001':'Dallas','SMU48264200000000001':'Houston','SMU48417000000000001':'San Antonio',
                            'SMU53426600000000001':'Seattle'}
+	elif statistic =='Private Employment':
+	    series = ['SMU04380600500000001', 'SMU06310800500000001', 'SMU06401400500000001',
+                      'SMU06417400500000001', 'SMU06418600500000001', 'SMU08197400500000001',
+                      'SMU11479000500000001', 'SMU12331000500000001', 'SMU12453000500000001',
+                      'SMU13120600500000001', 'SMU17169800500000001', 'SMU24125800500000001',
+                      'SMU25716500500000001', 'SMU26198200500000001', 'SMU27334600500000001',
+                      'SMU29411800500000001', 'SMU36356200500000001', 'SMU37167400500000001',
+                      'SMU41389000500000001', 'SMU42379800500000001', 'SMU42383000500000001',
+                      'SMU48191000500000001', 'SMU48264200500000001', 'SMU48417000500000001',
+                      'SMU53426600500000001']
+	    # series_dict not yet set up with key/value pairs
+	    series_dict = {'SMU04380600500000001', 'SMU06310800500000001', 'SMU06401400500000001',
+                      'SMU06417400500000001', 'SMU06418600500000001', 'SMU08197400500000001',
+                      'SMU11479000500000001', 'SMU12331000500000001', 'SMU12453000500000001',
+                      'SMU13120600500000001', 'SMU17169800500000001', 'SMU24125800500000001',
+                      'SMU25716500500000001', 'SMU26198200500000001', 'SMU27334600500000001',
+                      'SMU29411800500000001', 'SMU36356200500000001', 'SMU37167400500000001',
+                      'SMU41389000500000001', 'SMU42379800500000001', 'SMU42383000500000001',
+                      'SMU48191000500000001', 'SMU48264200500000001', 'SMU48417000500000001',
+                      'SMU53426600500000001'}
 	elif statistic == 'CPI':
 	    series = ['CUURA101SA0L1E', 'CUURA102SA0L1E', 'CUURA103SA0L1E',
 		      'CUURA104SA0L1E', 'CUURA207SA0L1E', 'CUURA208SA0L1E',
@@ -105,21 +128,18 @@ def getBLSData(geography, statistic, first_year, last_year, series = []):
     dataframes = []
     for i in range(0, len(json_data['Results']['series'])):
         df = pd.DataFrame(json_data['Results']['series'][i]['data'])
-        df['location'] = series_dict[json_data['Results']['series'][i]['seriesID']]
-        # Create datetime field
-        df['day'] = 01
-        df['date'] = pd.to_datetime(df.year.astype(int)*10000 + df.period.str[1:3].astype(int)*100 + df.day, format='%Y%m%d')
-        # Convert values to float
-        df.value = df.value.astype(float)
-        dataframes.append(df)
+	if len(df) > 0:
+            df['location'] = series_dict[json_data['Results']['series'][i]['seriesID']]
+            # Create datetime field
+            df['day'] = 01
+            df['date'] = pd.to_datetime(df.year.astype(int)*10000 + df.period.str[1:3].astype(int)*100 + df.day, format='%Y%m%d')
+            # Convert values to float
+            df.value = df.value.astype(float)
+            dataframes.append(df)
 
     # Append all dataframes onto first dataframe
-    df = dataframes[0]
-    for i in dataframes[1:]:
-        df = df.append(i)
+    df = pd.concat(dataframes)
         
     return df
 
 # Example: dataframes = getBLSData('Top 25 Metros', 'Unemployment Rate', 2012, 2015)
-
-# Add code to plot data from BLS request
