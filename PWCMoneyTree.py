@@ -24,7 +24,7 @@ def getVC_all_states(year1, year2, industry):
             - year2: The last year of interest
             - industry: Industry name as recognized by PricewaterhouseCoopers MoneyTree
         
-        Accepted industry arguments are: Biotechnology, Business Products and Services, Computers and Peripherals, Consumer Products and Services, Electronics/Instrumentation, Financial Services, Healthcare Services, Industrial/Energy, IT Services, Media and Entertainment, Medical Devices and Equipment, Networking and Equipment, Other, Retailing/Distribition, Semiconductors, Software, and Telecommunications.
+        Accepted industry arguments are: All Industries, Biotechnology, Business Products and Services, Computers and Peripherals, Consumer Products and Services, Electronics/Instrumentation, Financial Services, Healthcare Services, Industrial/Energy, IT Services, Media and Entertainment, Medical Devices and Equipment, Networking and Equipment, Other, Retailing/Distribition, Semiconductors, Software, and Telecommunications.
     '''
     month_lookup = pd.DataFrame({1:2, 2:5, 3:8, 4:11},index=[0]).T.reset_index().rename(columns={'index':'quarter', 0:'month'})
     industry_lookup={'All Industries':'', 'Biotechnology':'4000', 'Business Products and Services':'9300', 'Computers and Peripherals':'2200',
